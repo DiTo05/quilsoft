@@ -5,7 +5,7 @@
         <menuitem
             id="menu_hospital_root"
             name="Vertical Hospital"
-            web_icon="hr,static/description/icon.png"
+            web_icon="static/description/icon.png"
             sequence="186"/>
 
         <menuitem
