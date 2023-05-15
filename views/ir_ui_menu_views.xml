@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem
+            id="menu_hospital_root"
+            name="Vertical Hospital"
+            web_icon="hr,static/description/icon.png"
+            sequence="186"/>
+
+        <menuitem
+            id="menu_hospital_main"
+            name="Vertical Hospital"
+            parent="menu_hospital_root"
+            sequence="0"/>
+
+        <menuitem
+            id="menu_patient_root"
+            name="Patients"
+            parent="menu_hospital_root"
+            sequence="5"/>
+
+            <menuitem
+                id="menu_patient"
+                name="Patients"
+                action="patient_action"
+                parent="menu_patient_root"
+                sequence="1"/>
+
+        <menuitem
+            id="menu_treatment_root"
+            name="Treatments"
+            parent="menu_hospital_root"
+            sequence="10"/>
+
+            <menuitem
+                id="menu_treatment"
+                name="Treatments"
+                action="treatment_action"
+                parent="menu_treatment_root"
+                sequence="1"/>
+
+    </data>
+</odoo>

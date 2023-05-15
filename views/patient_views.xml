@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_patient_form" model="ir.ui.view">
+            <field name="name">patient.form</field>
+            <field name="model">patient</field>
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <header>
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="sequence"/>
+                            <h1>
+                                <field name="sequence" placeholder="PA/000000" force_save="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="last_name"/>
+                            </group>
+                            <group>
+                                <field name="dni"/>
+                            </group>
+                        </group>
+                        <group string="Treatment">
+                            <field name="treatment_ids" widget="many2many">
+                                <tree>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_patient_tree" model="ir.ui.view">
+            <field name="name">patient.tree</field>
+            <field name="model">patient</field>
+            <field name="arch" type="xml">
+                <tree string="Patient" sample="1">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="last_name"/>
+                    <field name="dni"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_patient_filter" model="ir.ui.view">
+            <field name="name">patient.search</field>
+            <field name="model">patient</field>
+            <field name="arch" type="xml">
+                <search string="Patient">
+                    <field name="name" string="Name"
+                           filter_domain="[('complete_name', 'ilike', self)]"/>
+                    <field name="sequence" string="Sequence"
+                           filter_domain="[('sequence', 'ilike', self)]"/>
+                    <field name="dni" string="Dni"
+                           filter_domain="[('dni', 'ilike', self)]"/>
+                    <field name="state" string="state"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_state" string="State" domain="[]" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="patient_action" model="ir.actions.act_window">
+            <field name="name">Patient</field>
+            <field name="res_model">patient</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_patient_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new patient
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>
